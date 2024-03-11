@@ -78,7 +78,7 @@ public class ProductQuery {
         try {
             SearchResponse<Product> searchResponse = elasticsearchClient.search(s -> s
                     .index(Indices.PRODUCT_INDEX)
-                    .query(q -> q.fuzzy((p -> p.field("description").queryName(desc)))), Product.class);
+                    .query(q -> q.fuzzy(((p -> p.field("description").value(desc))))), Product.class);
 
             List<Hit<Product>> hits = searchResponse.hits().hits();
             log.info("Find All, response: {}", searchResponse.hits().hits());
